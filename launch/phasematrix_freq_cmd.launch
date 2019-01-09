@@ -1,0 +1,12 @@
+<launch>
+
+  <node name = ""
+        type = ""
+        pkg = "">
+
+    <param name = ""
+           value = "" />
+
+  </node>
+
+</launch>

@@ -1,0 +1,17 @@
+# Phase Matrix
+
+<launch>
+
+  <node pkg="rx_device_driver"
+        name="fsw0010"
+        type="fsw0010.py"
+        required="true"
+        output="screen">
+
+    <param name="~host" value="192.168.100.52" />
+    <param name="~port" value="10001" />
+    <param name="~rate" value="1"
+
+  </node>
+
+</launch>
