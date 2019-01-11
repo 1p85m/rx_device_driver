@@ -34,20 +34,20 @@ class phasematrix_controller(object):
         self.sub_onoff = rospy.Subscriber(topic_onoff+'_cmd', String, self.onoff_set)
 
     def freq_set(self, q):
-        self.sg.freq_set(freq=q, unit='Hz')
+        self.sg.freq_set(freq=q.data, unit='Hz')
         freq = self.sg.freq_query()
         self.pub_freq.Publish(freq)
         return
 
     def power_set(self, q):
-        self.sg.power_set(pow=q, unit='dBm')
+        self.sg.power_set(pow=q.data, unit='dBm')
         power = self.sg.power_query()
         self.pub_power.Publish(power)
         return
 
     def onoff_set(self, q):
-        if q == 'on': self.sg.output_on()
-        if q == 'off': self.sg.output_off()
+        if q.data == 'on': self.sg.output_on()
+        if q.data == 'off': self.sg.output_off()
         onoff = self.sg.output_query()
         self.pub_onoff.Publish(onoff)
         pass
