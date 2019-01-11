@@ -36,23 +36,24 @@ class phasematrix_controller(object):
     def freq_set(self, q):
         self.sg.freq_set(freq=q.data, unit='GHz')
         freq = self.sg.freq_query()
-        self.pub_freq.Publish(freq)
+        self.pub_freq.publish(freq)
         return
 
     def power_set(self, q):
         self.sg.power_set(pow=q.data, unit='dBm')
         power = self.sg.power_query()
-        self.pub_power.Publish(power)
+        self.pub_power.publish(power)
         return
 
     def onoff_set(self, q):
         if q.data == 'on': self.sg.output_on()
         if q.data == 'off': self.sg.output_off()
         onoff = self.sg.output_query()
-        self.pub_onoff.Publish(onoff)
+        self.pub_onoff.publish(onoff)
         pass
 
 if __name__ == '__main__':
     rospy.init_node('phasematrix')
     phasematrix_controller()
     rospy.spin()
+
