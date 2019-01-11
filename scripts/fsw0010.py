@@ -35,6 +35,7 @@ class phasematrix_controller(object):
 
     def freq_set(self, q):
         self.sg.freq_set(freq=q.data, unit='Hz')
+        time.sleep(0.1)
         freq = self.sg.freq_query()
         print(freq)
         print(type(freq))
