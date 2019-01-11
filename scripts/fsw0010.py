@@ -34,7 +34,7 @@ class phasematrix_controller(object):
         self.sub_onoff = rospy.Subscriber(topic_onoff+'_cmd', String, self.onoff_set)
 
     def freq_set(self, q):
-        self.sg.freq_set(freq=q.data, unit='Hz')
+        self.sg.freq_set(freq=q.data, unit='GHz')
         freq = self.sg.freq_query()
         self.pub_freq.Publish(freq)
         return
