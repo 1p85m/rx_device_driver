@@ -52,7 +52,7 @@ class phasematrix_controller(object):
         self.pub_onoff.Publish(onoff)
         pass
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     rospy.init_node('phasematrix')
     phasematrix_controller()
     rospy.spin()
