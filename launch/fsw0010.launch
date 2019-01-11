@@ -8,7 +8,7 @@
 
     <param name="~host" value="192.168.100.52" />
     <param name="~port" value="10001" />
-    <param name="~rate" value="1"
+    <param name="~rate" value="1" />
 
   </node>
 
