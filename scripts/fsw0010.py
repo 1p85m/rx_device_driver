@@ -16,7 +16,7 @@ class phasematrix_controller(object):
         self.rate = rospy.get_param('~rate')
         ###=== Create instance ===###
         try:
-            com = pymeasure.ethernet(host, port)
+            com = pymeasure.ethernet(self.host, self.port)
             self.sg = pymeasure.Phasematrix.FSW0010(com)
         except OSError as e:
             rospy.logerr("{e.strerror}. node={node_name}".format(self.node_name, self.rsw_id))
