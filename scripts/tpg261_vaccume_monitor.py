@@ -1,58 +1,41 @@
-#! /usr/bin/env python3
-
-import sys
-import time
-import socket
-
-import rospy
-import std_msgs
+import rospy, os, sys, time, serial, threading
 from std_msgs.msg import Float64
 
 
 class tpg261_driver(object):
-    
-    def __init__(self, IP='', port=9600):
-        self.IP = IP
-        self.port = port
-        self.clientsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.clientsock.connect((self.IP, self.port))
+    def __init__(self):
+
+        self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
+        self.pub_p = rospy.Publisher("/tpg_status", String, queue_size=1)
+
+        self.tpg261 = serial.Serial("/dev/ttyUSB01",timeout=1)
 
     def query_pressure(self):
-        self.clientsock.sendall(bytes('PR1 \r\n', 'utf8'))
-        time.sleep(0.5)
-        self.clientsock.sendall(bytes('\x05', 'utf8'))
-        time.sleep(0.5)
-        raw = self.clientsock.recv(256)
-        raw_dec = raw.decode('utf8')
-        line = raw_dec.split('\r\n')
-        ret = line[1].split(',')
-        pressure = float(ret[1])
+        while not rospy.is_shutdown():
+            self.tpg261.write(b"PR1 \r[\n]")
+            time.sleep(1.0)
+            raw = self.tpg261.write(b"\x05")
+            time.sleep(1.0)
+            status = raw[0:1]
+            pressure = raw[2:13]
+            if status == '2'
+                 msg = String()
+                 msg.data = Overrange
+                 self.pub_status.publish(msg)
+            elif status == '0'
+                 msg　= Float64()
+                 msg.data = float(pressure)
+                 self.pub_p.publish(msg)
+            else
+                 pass
 
-        return pressure
+if __name__ == "__main__" :
+    rospy.init_node("tpg261")
+    tpg = tpg261_driver()
+    thread_tpg = threading.Thread(target=tpg.query_pressure)
+    thread_tpg.start()
+    tpg.query_pressure()
 
-if __name__ == '__main__':
-    node_name = 'tpg261'
-    rospy.init_node(node_name)
 
-    ch_number = 1
-    host = rospy.get_param('~host')
-    port = rospy.get_param('~port')
-    rate = rospy.get_param('~rate')
-    topic = rospy.get_param('~topic')
-
-    try:
-        pressure = tpg261_driver(host, port)
-    except OSError as e:
-        rospy.logerr("{e.strerror}. host={host}".format(**locals()))
-        sys.exit()
-
-    pub = rospy.Publisher(topic, Float64, queue_size=1)
-
-    while not rospy.is_shutdown():
-
-        ret = pressure.query_pressure()
-        
-        msg = Float64()
-        msg.data = ret
-        pub.publish(msg)
-        continue
+#2019
+#written by T.Takashima
