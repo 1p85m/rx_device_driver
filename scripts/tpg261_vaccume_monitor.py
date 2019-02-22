@@ -1,6 +1,6 @@
 import rospy, os, sys, time, serial, threading
 from std_msgs.msg import Float64
-
+from std_msgs.msg import String
 
 class tpg261_driver(object):
     def __init__(self):
@@ -8,7 +8,7 @@ class tpg261_driver(object):
         self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
         self.pub_p = rospy.Publisher("/tpg_status", String, queue_size=1)
 
-        self.tpg261 = serial.Serial("/dev/ttyUSB01",timeout=1)
+        self.tpg261 = serial.Serial("/dev/ttyUSB1",timeout=1)
 
     def query_pressure(self):
         while not rospy.is_shutdown():
@@ -18,15 +18,15 @@ class tpg261_driver(object):
             time.sleep(1.0)
             status = raw[0:1]
             pressure = raw[2:13]
-            if status == '2'
+            if status == '2':
                  msg = String()
                  msg.data = Overrange
                  self.pub_status.publish(msg)
-            elif status == '0'
-                 msg　= Float64()
+            elif status == '0':
+                 msg = Float64()
                  msg.data = float(pressure)
                  self.pub_p.publish(msg)
-            else
+            else:
                  pass
 
 if __name__ == "__main__" :
