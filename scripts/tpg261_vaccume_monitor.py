@@ -2,11 +2,12 @@ import rospy, os, sys, time, serial, threading
 from std_msgs.msg import Float64
 from std_msgs.msg import String
 
+
 class tpg261_driver(object):
     def __init__(self):
 
-        self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
-        self.pub_p = rospy.Publisher("/tpg_status", String, queue_size=1)
+        self.pub_p = rospy.Publisher("/tpg_pressure", String, queue_size=1)
+        self.pub_status = rospy.Publisher("/tpg_status", String, queue_size=1)
 
         self.tpg261 = serial.Serial("/dev/ttyUSB1",timeout=1)
 
@@ -14,18 +15,23 @@ class tpg261_driver(object):
         while not rospy.is_shutdown():
             self.tpg261.write(b"PR1 \r[\n]")
             time.sleep(1.0)
-            raw = self.tpg261.write(b"\x05")
+            self.tpg261.write(b"\x05")
             time.sleep(1.0)
+            raw = self.tpg261.readline()
             status = raw[0:1]
             pressure = raw[2:13]
+            if not raw == b'\x06\r\n':
+                continue
             if status == b'2':
-                 msg = String()
-                 msg.data = Overrange
+                 msg = str(Overrange)
                  self.pub_status.publish(msg)
-            elif status == b'0':
-                 msg = Float64()
-                 msg.data = float(pressure)
+            if status == b'0':
+                 msg = str(pressure)
                  self.pub_p.publish(msg)
+          #elif status == b'0':
+             #    msg = String()
+              #   msg.data = pressure
+               #  self.pub_el.publish(msg)
             else:
                  pass
 
@@ -39,3 +45,4 @@ if __name__ == "__main__" :
 
 #2019
 #written by T.Takashima
+
