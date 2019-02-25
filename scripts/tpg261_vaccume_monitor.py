@@ -7,7 +7,6 @@ class tpg261_driver(object):
     def __init__(self):
 
         self.pub_p = rospy.Publisher("/tpg_pressure", String, queue_size=1)
-        self.pub_status = rospy.Publisher("/tpg_status", String, queue_size=1)
 
         self.tpg261 = serial.Serial("/dev/ttyUSB1",timeout=1)
 
@@ -26,7 +25,7 @@ class tpg261_driver(object):
                  if status == b'2':
                       msg = String()
                       msg.data = Overrange
-                      self.pub_status.publish(msg)
+                      self.pub_p.publish(msg)
                  elif status == b'0':
                       msg = String()
                       msg.data = pressure
