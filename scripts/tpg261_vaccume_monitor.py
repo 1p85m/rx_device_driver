@@ -18,11 +18,11 @@ class tpg261_driver(object):
             time.sleep(1.0)
             status = raw[0:1]
             pressure = raw[2:13]
-            if status == '2':
+            if status == b'2':
                  msg = String()
                  msg.data = Overrange
                  self.pub_status.publish(msg)
-            elif status == '0':
+            elif status == b'0':
                  msg = Float64()
                  msg.data = float(pressure)
                  self.pub_p.publish(msg)
