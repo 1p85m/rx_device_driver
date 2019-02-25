@@ -13,27 +13,26 @@ class tpg261_driver(object):
 
     def query_pressure(self):
         while not rospy.is_shutdown():
-            self.tpg261.write(b"PR1 \r[\n]")
-            time.sleep(1.0)
+            self.tpg261.write(b"PR1 \r\n")
+            time.sleep(0.3)
             self.tpg261.write(b"\x05")
-            time.sleep(1.0)
+            time.sleep(0.3)
             raw = self.tpg261.readline()
             status = raw[0:1]
-            pressure = raw[2:13]
-            if not raw == b'\x06\r\n':
+            pressure = str(raw[2:13])
+            if raw == b'\x06\r\n':
                 continue
-            if status == b'2':
-                 msg = str(Overrange)
-                 self.pub_status.publish(msg)
-            if status == b'0':
-                 msg = str(pressure)
-                 self.pub_p.publish(msg)
-          #elif status == b'0':
-             #    msg = String()
-              #   msg.data = pressure
-               #  self.pub_el.publish(msg)
             else:
-                 pass
+                 if status == b'2':
+                      msg = String()
+                      msg.data = Overrange
+                      self.pub_status.publish(msg)
+                 elif status == b'0':
+                      msg = String()
+                      msg.data = pressure
+                      self.pub_p.publish(msg)
+                 else:
+                      pass
 
 if __name__ == "__main__" :
     rospy.init_node("tpg261")
