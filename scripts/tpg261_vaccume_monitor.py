@@ -1,5 +1,4 @@
 import rospy, os, sys, time, serial, threading
-from std_msgs.msg import Float64
 from std_msgs.msg import String
 
 
