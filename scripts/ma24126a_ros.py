@@ -36,8 +36,8 @@ class ma24126a_controller(object):
         rospy.Subscriber("ma24126a_power_cmd", Float64, self.power_switch)
         rospy.Subscriber("ma24126a_avemode_cmd", Float64, self.avemode_switch)
         rospy.Subscriber("ma24126a_avetyp_cmd", Float64, self.avetyp_switch)
-        rospy.Subscriber("ma24126a_capt_cmd", Float64, self.capt_switch, callback_ags=1)
-        rospy.Subscriber("ma24126a_avemode_cmd", Float64, self.avemode_switch, callback_ags=1)
+        rospy.Subscriber("ma24126a_capt_cmd", Float64, self.capt_switch, callback_args=1)
+        rospy.Subscriber("ma24126a_avemode_cmd", Float64, self.avemode_switch, callback_args=1)
 
         self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 1)
 
