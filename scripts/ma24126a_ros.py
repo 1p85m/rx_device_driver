@@ -7,10 +7,10 @@ from std_msgs.msg import String
 import serial
 import time
 import sys,os
-
-sys.path.append("/home/amigos/ros/src")
 import threading
-import pymeasure
+
+sys.path.append("/root/python")
+import pymeasure_usbpm
 
 
 class ma24126a_controller(object):
