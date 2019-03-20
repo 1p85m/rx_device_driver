@@ -12,4 +12,109 @@
     <param name="~pm_ch" value="2" />
   </node>
 
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_reader_ch1"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_reader_ch1.conf" />
+
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_cur_reader_ch1"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_cur_reader_ch1.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_writer_ch1"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_writer_ch1.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_reader_ch2"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_reader_ch2.conf" />
+
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_cur_reader_ch2"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_cur_reader_ch2.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_writer_ch2"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_writer_ch2.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_reader_ch3"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_reader_ch3.conf" />
+
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_cur_reader_ch3"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_cur_reader_ch3.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_writer_ch3"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_writer_ch3.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_reader_ch4"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_reader_ch4.conf" />
+
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_cur_reader_ch4"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_cur_reader_ch4.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "sis_bias_vol_writer_ch4"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/sis_bias_vol_writer_ch4.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "pm_power_reader_ch1"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/pm_power_reader_ch1.conf" />
+    </node>
+
+    <node pkg = "rx_device_driver"
+          name = "pm_power_reader_ch2"
+          type = "relay.py">
+      <param name = "config_file"
+             value = "$(find rx_device_driver)/relay_conf/pm_power_reader_ch2.conf" />
+    </node>
+
+
+
 </launch>
