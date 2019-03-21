@@ -22,7 +22,7 @@ class ma24126a_controller(object):
         self.start_flag = 0
         self.zero_set_flag = 0
         self.close_flag = 0
-        self.power_flag = 0
+        self.power_flag = 1
         self.avemode_flag = 0
         self.avetyp_flag = 0
         self.capt_flag = 0
