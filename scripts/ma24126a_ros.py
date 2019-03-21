@@ -46,7 +46,6 @@ class ma24126a_controller(object):
         self.pm.zero_set()
         print("Finish zero setting !!")
 
-
 #flag
     def start_switch(self,q):
         self.start_flag = q.data
@@ -129,12 +128,10 @@ class ma24126a_controller(object):
 
     def power(self):
         msg = Float64()
-        while not rospy.is_shutdown():
-
+        while True:
             ret = self.pm.power()
             msg.data = float(ret)
             self.pub_power.publish(msg)
-
             continue
 
     def close(self):
@@ -213,5 +210,6 @@ class ma24126a_controller(object):
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
     ctrl = ma24126a_controller()
+    cnrl.power()
     ctrl.start_thread()
     rospy.spin()
