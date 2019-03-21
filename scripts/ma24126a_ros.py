@@ -128,7 +128,6 @@ class ma24126a_controller(object):
             ret = self.pm.power()
             msg.data = float(ret)
             self.pub_power.publish(msg)
-            continue
 
         """
     def power(self):
@@ -216,5 +215,6 @@ class ma24126a_controller(object):
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
     ctrl = ma24126a_controller()
+    ctrl.power()
     ctrl.start_thread()
     rospy.spin()
