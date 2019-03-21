@@ -114,14 +114,15 @@ class ma24126a_controller(object):
                 continue
 
             while self.power_flag == 1:
-                msg = Float64()
-                ret = self.pm.power()
                 try:
-                    msg.data = float(ret)
-                    self.pub_power.publish(msg)
+                    ret = self.pm.power()
                     time.sleep(0.1)
                 except:
-                    pass
+                    continue
+                msg = Float64()
+                msg.data = float(ret)
+                self.pub_power.publish(msg)
+
                 continue
             continue
 
