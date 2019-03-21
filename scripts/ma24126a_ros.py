@@ -40,12 +40,11 @@ class ma24126a_controller(object):
         rospy.Subscriber("ma24126a_capt_cmd", Float64, self.capt_switch, callback_args=1)
         rospy.Subscriber("ma24126a_avemode_cmd", Float64, self.avemode_switch, callback_args=1)
 
-        self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 1)
+        self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 1000)
 
         print("Doing zero setting now")
         self.pm.zero_set()
         print("Finish zero setting !!")
-
 
 #flag
     def start_switch(self,q):
@@ -107,36 +106,36 @@ class ma24126a_controller(object):
             self.zero_set_flag = 0
             continue
 
-    """
     def power(self):
+        msg = Float64()
         while not rospy.is_shutdown():
             if self.power_flag == 0:
-                time.sleep(0.1)
                 continue
 
             while self.power_flag == 1:
-                try:
-                    ret = self.pm.power()
-                    time.sleep(0.1)
-                except:
-                    continue
-                msg = Float64()
+                ret = self.pm.power()
                 msg.data = float(ret)
                 self.pub_power.publish(msg)
 
             continue
-    """
 
+    """
     def power(self):
         while not rospy.is_shutdown():
-
-            ret = self.pm.power()
-
             msg = Float64()
+            ret = self.pm.power()
             msg.data = float(ret)
             self.pub_power.publish(msg)
-
             continue
+
+    def power(self):
+        msg = Float64()
+        while True:
+            ret = self.pm.power()
+            msg.data = float(ret)
+            self.pub_power.publish(msg)
+    """
+
 
     def close(self):
         while not rospy.is_shutdown():
@@ -210,6 +209,7 @@ class ma24126a_controller(object):
         th7 = threading.Thread(target=self.change_mode)
         th7.setDaemon(True)
         th7.start()
+
 
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
