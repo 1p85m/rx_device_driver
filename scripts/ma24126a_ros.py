@@ -190,9 +190,6 @@ class ma24126a_controller(object):
 #thread
 
     def start_thread(self):
-        th1 = threading.Thread(target=self.power)
-        th1.setDaemon(True)
-        th1.start()
         th2 = threading.Thread(target=self.change_capt)
         th2.setDaemon(True)
         th2.start()
@@ -212,8 +209,14 @@ class ma24126a_controller(object):
         th7.setDaemon(True)
         th7.start()
 
+    def start_thread_power(self):
+        th1 = threading.Thread(target=self.power)
+        th1.setDaemon(True)
+        th1.start()
+
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
     ctrl = ma24126a_controller()
     ctrl.start_thread()
+    ctrl.start_thread_power()
     rospy.spin()
