@@ -191,6 +191,8 @@ class ma24126a_controller(object):
         th1 = threading.Thread(target=self.power)
         th1.setDaemon(True)
         th1.start()
+
+    """
         th2 = threading.Thread(target=self.change_capt)
         th2.setDaemon(True)
         th2.start()
@@ -209,7 +211,7 @@ class ma24126a_controller(object):
         th7 = threading.Thread(target=self.change_mode)
         th7.setDaemon(True)
         th7.start()
-
+    """
 
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
