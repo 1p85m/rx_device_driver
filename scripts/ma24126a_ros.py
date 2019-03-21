@@ -191,6 +191,7 @@ class ma24126a_controller(object):
         th1 = threading.Thread(target=self.power)
         th1.setDaemon(True)
         th1.start()
+
     """
         th2 = threading.Thread(target=self.change_capt)
         th2.setDaemon(True)
