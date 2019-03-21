@@ -11,35 +11,33 @@ class p_att_driver(object):
         self.pub_state1 = rospy.Publisher("/get_p_att1", Int32, queue_size=1)
         self.pub_state2 = rospy.Publisher("/get_p_att2", Int32, queue_size=1)
         
-        self.ip = ip
-        self.port = port
-        com = pymeasure.ethernet(self.ip, self.port)
-        IO = pymeasure.SENA.adio(com)
+        self.com = pymeasure.ethernet(ip, port)
+        self.IO = pymeasure.SENA.adio(self.com)
 
     def query_p_att1(self):
         while not rospy.is_shutdown():
-            raw = IO.get_att1()
+            raw = self.IO.get_att1()
             msg = Int32()
             msg.data = raw
             self.pub_state1.publish(msg)
 
     def query_p_att2(self):
         while not rospy.is_shutdown():
-            raw = IO.get_att2()
+            raw = self.IO.get_att2()
             msg = Int32()
             msg.data = raw
             self.pub_state2.publish(msg)
 
     def set_p_att1(self, self.value):
         while not rospy.is_shutdown():
-            raw = IO._set_att(1, self.value)
+            raw = self.IO._set_att(1, value)
             msg = Int32()
             msg.data = raw
             self.pub_value1.publish(msg)
 
     def set_p_att2(self, self.value):
         while not rospy.is_shutdown():
-            raw = IO._set_att(2, self.value)
+            raw = self.IO._set_att(2, value)
             msg = Int32()
             msg.data = raw
             self.pub_value2.publish(msg)
