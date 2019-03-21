@@ -40,7 +40,7 @@ class ma24126a_controller(object):
         rospy.Subscriber("ma24126a_capt_cmd", Float64, self.capt_switch, callback_args=1)
         rospy.Subscriber("ma24126a_avemode_cmd", Float64, self.avemode_switch, callback_args=1)
 
-        self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 1000)
+        self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 100)
 
         print("Doing zero setting now")
         self.pm.zero_set()
