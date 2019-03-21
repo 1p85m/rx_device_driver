@@ -88,7 +88,7 @@ class ma24126a_controller(object):
                 continue
 
             self.pm.start()
-
+            time.sleep(0.1)
             self.start_flag = 0
             continue
 
@@ -98,6 +98,7 @@ class ma24126a_controller(object):
                 continue
 
             self.pm.zero_set()
+            time.sleep(0.1)
 
             self.zero_set_flag = 0
             continue
