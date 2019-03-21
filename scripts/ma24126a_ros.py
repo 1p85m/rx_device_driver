@@ -42,7 +42,6 @@ class ma24126a_controller(object):
 
         self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 1)
 
-        self.pm.start()
         print("Doing zero setting now")
         self.pm.zero_set()
         print("Finish zero setting !!")
