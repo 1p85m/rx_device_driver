@@ -18,6 +18,7 @@ class ma24126a_controller(object):
 
         self.pm = pymeasure_usbpm.usbpm.open("ma24126a")
         self.rate = rospy.get_param("~rate")
+
 #flag
         self.start_flag = 0
         self.zero_set_flag = 0
@@ -41,6 +42,10 @@ class ma24126a_controller(object):
 
         self.pub_power = rospy.Publisher("ma24126a_power", Float64, queue_size = 1)
 
+        self.pm.start()
+        print("Doing zero setting now")
+        self.pm.zero_set()
+        print("Finish zero setting !!")
 
 
 #flag
@@ -115,6 +120,7 @@ class ma24126a_controller(object):
                 try:
                     msg.data = float(ret)
                     self.pub_power.publish(msg)
+                    time.sleep(0.1)
                 except:
                     pass
                 continue
