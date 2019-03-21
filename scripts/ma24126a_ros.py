@@ -45,6 +45,7 @@ class ma24126a_controller(object):
         print("Doing zero setting now")
         self.pm.zero_set()
         print("Finish zero setting !!")
+        self.pm.
 
 
 #flag
@@ -107,22 +108,36 @@ class ma24126a_controller(object):
             self.zero_set_flag = 0
             continue
 
+    """
     def power(self):
         while not rospy.is_shutdown():
             if self.power_flag == 0:
                 time.sleep(0.1)
                 continue
 
-
             while self.power_flag == 1:
-                ret = self.pm.power()
-                time.sleep(0.1)
+                try:
+                    ret = self.pm.power()
+                    time.sleep(0.1)
+                except:
+                    continue
                 msg = Float64()
                 msg.data = float(ret)
                 self.pub_power.publish(msg)
-                continue
-            continue
 
+            continue
+    """
+
+    def power(self):
+        while not rospy.is_shutdown():
+
+            ret = self.pm.power()
+
+            msg = Float64()
+            msg.data = float(ret)
+            self.pub_power.publish(msg)
+
+            continue
 
     def close(self):
         while not rospy.is_shutdown():
