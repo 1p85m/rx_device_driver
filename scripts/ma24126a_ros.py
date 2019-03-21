@@ -210,6 +210,6 @@ class ma24126a_controller(object):
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
     ctrl = ma24126a_controller()
-    cnrl.power()
+    ctrl.power()
     ctrl.start_thread()
     rospy.spin()
