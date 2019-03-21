@@ -128,11 +128,10 @@ class ma24126a_controller(object):
     """
 
     def power(self):
+        msg = Float64()
         while not rospy.is_shutdown():
 
             ret = self.pm.power()
-
-            msg = Float64()
             msg.data = float(ret)
             self.pub_power.publish(msg)
 
