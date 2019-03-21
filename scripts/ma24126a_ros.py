@@ -121,7 +121,7 @@ class ma24126a_controller(object):
             continue
 
     """
-
+    """
     def power(self):
         msg = Float64()
         while True:
@@ -129,15 +129,15 @@ class ma24126a_controller(object):
             msg.data = float(ret)
             self.pub_power.publish(msg)
 
-        """
+    """
     def power(self):
-        msg = Float64()
         while not rospy.is_shutdown():
+            msg = Float64()
             ret = self.pm.power()
             msg.data = float(ret)
             self.pub_power.publish(msg)
             continue
-        """
+
 
     def close(self):
         while not rospy.is_shutdown():
@@ -215,6 +215,5 @@ class ma24126a_controller(object):
 if __name__ == "__main__" :
     rospy.init_node("ma24126a")
     ctrl = ma24126a_controller()
-    ctrl.power()
     ctrl.start_thread()
     rospy.spin()
