@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="rx_device_driver" name="p_att" type="p_att.py" required="true" output="screen">
+    <param name="~host" value="192.168.100.28" />
+    <param name="~port" value="6100" />
+    <param name="~rate" value="1" />
+  </node>
+</launch>
