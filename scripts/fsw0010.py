@@ -23,7 +23,7 @@ class phasematrix_controller(object):
         ###=== Define topic ===###
         topic_freq = 'phasematrix_freq'
         topic_power = 'phasematrix_power'
-        topic_onoff = 'phasematirx_onoff'
+        topic_onoff = 'phasematrix_onoff'
         ###=== Define Publisher ===###
         self.pub_freq = rospy.Publisher(topic_freq, Float64, queue_size=1)
         self.pub_power = rospy.Publisher(topic_power, Float64, queue_size=1)
