@@ -6,7 +6,7 @@
         required="true"
         output="screen">
 
-    <param name="~host" value="192.168.100.52" />
+    <param name="~host" value="192.168.100.41" />
     <param name="~port" value="10001" />
     <param name="~rate" value="1" />
 
