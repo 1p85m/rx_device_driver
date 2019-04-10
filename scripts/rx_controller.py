@@ -14,6 +14,9 @@ class controllaer(object):
         self.logger = logger()
         self.chopper = chopper()
 
+    def pub(self):
+        pass
+
 
 class sis_iv(object):
     def __init__(self):
@@ -36,12 +39,24 @@ class logger(object):
     self.pub_piv_logger = rospy.Publisher("/sis_piv_logger_flag", String, queue_size=1)
     self.pub_XFFTS_logger = rospy.Publisher("/XFFTS_logger_flag", String, queue_size=1)
 
-    def start(self, flag):
+    def ready(self, flag):
+        self.pub_piv_logger.publish("ready")
+        self.pub_XFFTS_logger.publish("ready")
         pass
 
+    def start(self, flag):
+        self.pub_piv_logger.publish("start")
+        self.pub_XFFTS_logger.publish("start")
+        pass
+
+    def end(self, flag):
+        self.pub_piv_logger.publish("end")
+        self.pub_XFFTS_logger.publish("end")
+        pass
 
 class chopper(object):
     def __init__(self):
+        self.pub_ = rospy.Publisher("", Int64, queue_size=1)
         pass
 
     def jog(self, ):
@@ -52,11 +67,21 @@ class chopper(object):
 
 class phasematrix(object):
     def __init__(self):
+        self.pub_freq = rospy.Publisher("/phasematrix_freq_cmd", Float64, queue_size=1)
+        self.pub_power = rospy.Publisher("/phasematrix_power_cmd", Float64, queue_size=1)
+        self.pub_onoff = rospy.Publisher("/phasematrix_onoff_cmd", String, queue_size=1)
+
+    def onoff(self, onoff):
+        self.pub_onoff.publish(onoff)
         pass
 
-    def output(self, freq):
+    def freq(self, freq):
+        self.pub_freq.publish(freq)
         pass
 
+    def power(self, power):
+        self.pub_power.publish(power)
+        pass
 
 class e8250d_signal_generateor(object):
     def __init__(self):
@@ -65,9 +90,14 @@ class e8250d_signal_generateor(object):
     def output(self, freq):
         pass
 
+class ml2437a(object):
+    def __init__(self):
+
+        pass
 
 class usbpm(object):
     def __init__(self):
+
         pass
 
     def output(self, freq):
