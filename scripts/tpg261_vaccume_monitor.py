@@ -75,54 +75,53 @@ class tpg261_driver(object):
         else:
             pass
 
-         if status2 == b'0':
-                        msg = String()
-                        msg.data = cannot be changed
-                        self.pub_p.publish(msg)
-                   elif status2 == b'1':
-                        msg = String()
-                        msg.data = turned off
-                        self.pub_p.publish(msg)
-                   elif status2 == b'2':
-                              msg = String()
-                              msg.data = turned on
-                              self.pub_p.publish(msg)
-                   else:
-                        pass
+        if status2 == b'0':
+            msg = String()
+            msg.data = cannot be changed
+            self.pub_p.publish(msg)
+        elif status2 == b'1':
+            msg = String()
+            msg.data = turned off
+            self.pub_p.publish(msg)
+        elif status2 == b'2':
+            msg = String()
+            msg.data = turned on
+            self.pub_p.publish(msg)
+        else:
+            pass
 
 
     def turn_gauge(self):
-            self.query_gauge.gauge_change(gague1,gague2)
+        self.query_gauge.gauge_change(gague1,gague2)
+        if status1 == b'0':
+            msg = String()
+            msg.data = cannot be changed
+            self.pub_p.publish(msg)
+        elif status1 == b'1':
+            msg = String()
+            msg.data = turned off
+            self.pub_p.publish(msg)
+        elif status1 == b'2':
+            msg = String()
+            msg.data = turned on
+            self.pub_p.publish(msg)
+        else:
+            pass
 
-                 if status1 == b'0':
-                      msg = String()
-                      msg.data = cannot be changed
-                      self.pub_p.publish(msg)
-                 elif status1 == b'1':
-                      msg = String()
-                      msg.data = turned off
-                      self.pub_p.publish(msg)
-                 elif status1 == b'2':
-                      msg = String()
-                      msg.data = turned on
-                      self.pub_p.publish(msg)
-                 else:
-                      pass
-
-                   if status2 == b'0':
-                        msg = String()
-                        msg.data = cannot be changed
-                        self.pub_p.publish(msg)
-                   elif status2 == b'1':
-                        msg = String()
-                        msg.data = turned off
-                        self.pub_p.publish(msg)
-                   elif status2 == b'2':
-                        msg = String()
-                        msg.data = turned on
-                        self.pub_p.publish(msg)
-                   else:
-                        pass
+        if status2 == b'0':
+            msg = String()
+            msg.data = cannot be changed
+            self.pub_p.publish(msg)
+        elif status2 == b'1':
+            msg = String()
+            msg.data = turned off
+            self.pub_p.publish(msg)
+        elif status2 == b'2':
+            msg = String()
+            msg.data = turned on
+            self.pub_p.publish(msg)
+        else:
+            pass
 
     def display_gauge1(self):
         self.channel_dis.change_gague1()
@@ -138,28 +137,28 @@ class tpg261_driver(object):
 
     def error_status(self):
         self.error_moni.query_error()
-                   if status == b'0000':
-                        msg = String()
-                        msg.data = No error
-                        self.pub_p.publish(msg)
-                   elif status == b'1000':
-                        msg = String()
-                        msg.data = Controller Error see display
-                        self.pub_p.publish(msg)
-                   elif status == b'0100':
-                        msg = String()
-                        msg.data = No hardware
-                        self.pub_p.publish(msg)
-                   elif status == b'0010':
-                        msg = String()
-                        msg.data = Inadmissible parameter
-                        self.pub_p.publish(msg)
-                   elif status == b'0001':
-                        msg = String()
-                        msg.data = Syntax Error
-                        self.pub_p.publish(msg)
-                   else:
-                        pass
+        if status == b'0000':
+            msg = String()
+            msg.data = No error
+            self.pub_p.publish(msg)
+        elif status == b'1000':
+            msg = String()
+            msg.data = Controller Error see display
+            self.pub_p.publish(msg)
+        elif status == b'0100':
+            msg = String()
+            msg.data = No hardware
+            self.pub_p.publish(msg)
+        elif status == b'0010':
+            msg = String()
+            msg.data = Inadmissible parameter
+            self.pub_p.publish(msg)
+        elif status == b'0001':
+            msg = String()
+            msg.data = Syntax Error
+            self.pub_p.publish(msg)
+        else:
+            pass
 
 
 if __name__ == "__main__" :
