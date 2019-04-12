@@ -3,7 +3,7 @@
 import rospy, os, sys, time, serial, threading
 from std_msgs.msg import String
 
-from pymeasure import tpg261
+from pymeasure_tpg261 import tpg261
 
 class tpg261_driver(object):
     def __init__(self):
