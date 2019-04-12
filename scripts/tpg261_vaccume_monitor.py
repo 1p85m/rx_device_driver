@@ -15,7 +15,7 @@ class tpg261_driver(object):
     def query_pressure(self):
         while not rospy.is_shutdown():
             self.dev.pressure_device()
-            if raw == b'\x06\r\n':
+            if raw1 == b'\x06\r\n':
                 continue
             else:
                  if status == b'2':
@@ -32,7 +32,7 @@ class tpg261_driver(object):
     def query_bothpressure(self):
         while not rospy.is_shutdown():
             self.dev.pressure_both()
-            if raw1 == b'\x06\r\n':
+            if raw2 == b'\x06\r\n':
                 continue
             else:
                  if status1 == b'2' or status2 == b'2':
