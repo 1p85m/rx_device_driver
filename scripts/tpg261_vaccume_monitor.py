@@ -4,6 +4,8 @@ import rospy, os, sys, time, serial, threading
 from std_msgs.msg import String
 
 from pymeasure import *
+import tpg261
+
 class tpg261_driver(object):
     def __init__(self):
 
@@ -11,19 +13,11 @@ class tpg261_driver(object):
 
         self.tpg261 = serial.Serial("/dev/ttyUSB1",timeout=1)
 
-        self.query_pres = pressure()
-
-        self.query_bothpres = pressure()
-
-        self.query_gauge = gauge()
-
-        self.channel_dis = display()
-
-        self.error_moni = error()
+        self.dev = tpg261.device()
 
     def query_pressure(self):
         while not rospy.is_shutdown():
-            self.query_pres.pressure_device()
+            self.dev.pressure_device()
             if raw == b'\x06\r\n':
                 continue
             else:
@@ -40,7 +34,7 @@ class tpg261_driver(object):
 
     def query_bothpressure(self):
         while not rospy.is_shutdown():
-            self.query_bothpres.pressure_both()
+            self.dev.pressure_both()
             if raw == b'\x06\r\n':
                 continue
             else:
@@ -58,7 +52,7 @@ class tpg261_driver(object):
 
 
     def check_gauge(self):
-        self.query_gauge.gauge_check()
+        self.dev.gauge_check()
 
         if status1 == b'0':
             msg = String()
@@ -92,7 +86,7 @@ class tpg261_driver(object):
 
 
     def turn_gauge(self):
-        self.query_gauge.gauge_change(gague1,gague2)
+        self.dev.gauge_change(gague1,gague2)
         if status1 == b'0':
             msg = String()
             msg.data = CannotBeChanged
@@ -124,19 +118,19 @@ class tpg261_driver(object):
             pass
 
     def display_gauge1(self):
-        self.channel_dis.change_gague1()
+        self.dev.change_gague1()
         msg = String()
         msg.data = gague1
         self.pub_p.publish(msg)
 
     def display_gauge2(self):
-        self.channel_dis.change_gague2()
+        self.dev.change_gague2()
         msg = String()
         msg.data = gague2
         self.pub_p.publish(msg)
 
     def error_status(self):
-        self.error_moni.query_error()
+        self.dev.query_error()
         if status == b'0000':
             msg = String()
             msg.data = NoError
