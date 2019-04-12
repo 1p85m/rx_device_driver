@@ -62,7 +62,7 @@ class tpg261_driver(object):
 
         if status1 == b'0':
             msg = String()
-            msg.data = CannotBeChange
+            msg.data = CannotBeChanged
             self.pub_p.publish(msg)
         elif status1 == b'1':
             msg = String()
@@ -77,15 +77,15 @@ class tpg261_driver(object):
 
         if status2 == b'0':
             msg = String()
-            msg.data = cannot be changed
+            msg.data = CannotBeChanged
             self.pub_p.publish(msg)
         elif status2 == b'1':
             msg = String()
-            msg.data = turned off
+            msg.data = TurnedOff
             self.pub_p.publish(msg)
         elif status2 == b'2':
             msg = String()
-            msg.data = turned on
+            msg.data = TurnedOn
             self.pub_p.publish(msg)
         else:
             pass
@@ -95,30 +95,30 @@ class tpg261_driver(object):
         self.query_gauge.gauge_change(gague1,gague2)
         if status1 == b'0':
             msg = String()
-            msg.data = cannot be changed
+            msg.data = CannotBeChanged
             self.pub_p.publish(msg)
         elif status1 == b'1':
             msg = String()
-            msg.data = turned off
+            msg.data = TurnedOff
             self.pub_p.publish(msg)
         elif status1 == b'2':
             msg = String()
-            msg.data = turned on
+            msg.data = TurnedOn
             self.pub_p.publish(msg)
         else:
             pass
 
         if status2 == b'0':
             msg = String()
-            msg.data = cannot be changed
+            msg.data = CannotBeChanged
             self.pub_p.publish(msg)
         elif status2 == b'1':
             msg = String()
-            msg.data = turned off
+            msg.data = TurnedOff
             self.pub_p.publish(msg)
         elif status2 == b'2':
             msg = String()
-            msg.data = turned on
+            msg.data = TurnedOn
             self.pub_p.publish(msg)
         else:
             pass
@@ -139,23 +139,23 @@ class tpg261_driver(object):
         self.error_moni.query_error()
         if status == b'0000':
             msg = String()
-            msg.data = No error
+            msg.data = NoError
             self.pub_p.publish(msg)
         elif status == b'1000':
             msg = String()
-            msg.data = Controller Error see display
+            msg.data = ControllerErrorSeeDisplay
             self.pub_p.publish(msg)
         elif status == b'0100':
             msg = String()
-            msg.data = No hardware
+            msg.data = NoHardware
             self.pub_p.publish(msg)
         elif status == b'0010':
             msg = String()
-            msg.data = Inadmissible parameter
+            msg.data = InadmissibleParameter
             self.pub_p.publish(msg)
         elif status == b'0001':
             msg = String()
-            msg.data = Syntax Error
+            msg.data = Syntaxerror
             self.pub_p.publish(msg)
         else:
             pass
