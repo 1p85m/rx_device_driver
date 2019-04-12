@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import rospy, os, sys, time, serial, threading
 from std_msgs.msg import String
 
@@ -35,7 +37,7 @@ class tpg261_driver(object):
                       self.pub_p.publish(msg)
                  else:
                       pass
-                  
+
     def query_bothpressure(self):
         while not rospy.is_shutdown():
             self.query_bothpres.pressure_both()
