@@ -60,22 +60,22 @@ class tpg261_driver(object):
     def check_gauge(self):
         self.query_gauge.gauge_check()
 
-             if status1 == b'0':
-                      msg = String()
-                      msg.data = cannot be changed
-                      self.pub_p.publish(msg)
-                 elif status1 == b'1':
-                      msg = String()
-                      msg.data = turned off
-                      self.pub_p.publish(msg)
-                 elif status1 == b'2':
-                            msg = String()
-                            msg.data = turned on
-                            self.pub_p.publish(msg)
-                 else:
-                      pass
+         if status1 == b'0':
+             msg = String()
+             msg.data = cannot be change
+             self.pub_p.publish(msg)
+         elif status1 == b'1':
+             msg = String()
+             msg.data = turned off
+             self.pub_p.publish(msg)
+         elif status1 == b'2':
+             msg = String()
+             msg.data = turned on
+             self.pub_p.publish(msg)
+         else:
+             pass
 
-                   if status2 == b'0':
+         if status2 == b'0':
                         msg = String()
                         msg.data = cannot be changed
                         self.pub_p.publish(msg)
