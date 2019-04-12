@@ -10,8 +10,6 @@ class tpg261_driver(object):
 
         self.pub_p = rospy.Publisher("/tpg_pressure", String, queue_size=1)
 
-        self.tpg261 = serial.Serial("/dev/ttyUSB1",timeout=1)
-
         self.dev = tpg261.device()
 
     def query_pressure(self):
