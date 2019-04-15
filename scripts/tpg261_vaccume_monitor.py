@@ -12,7 +12,7 @@ class tpg261_driver(object):
 
         self.dev = tpg261.device()
 
-    def query_pressure(self):
+    def query_pressure(self,raw1):
         while not rospy.is_shutdown():
             self.dev.pressure_device()
             if raw1 == b'\x06\r\n':
