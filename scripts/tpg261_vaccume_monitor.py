@@ -23,7 +23,7 @@ class tpg261_driver(object):
             if self.b == 0:
                 pressure = self.dev.pressure()
                 #a = float(pressure)
-                self.pub_p.publish(a)
+                self.pub_p.publish(pressure)
                 continue
             else:
                  if status == b'2':
