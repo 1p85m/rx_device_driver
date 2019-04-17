@@ -17,7 +17,7 @@ class tpg261_driver(object):
             self.dev.pressure_device()
             self.dev.check()
             raw = a
-            if raw == 0
+            if raw == 0:
                 continue
             else:
                  if status == b'2':
