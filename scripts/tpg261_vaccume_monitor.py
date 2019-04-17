@@ -18,6 +18,7 @@ class tpg261_driver(object):
             self.b = self.dev.check()
             status = self.dev.pressure_device()
             print("akann1")
+            print(self.b)
             if self.b == 0:
                 continue
             else:
