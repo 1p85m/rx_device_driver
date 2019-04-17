@@ -22,7 +22,7 @@ class tpg261_driver(object):
             status = self.dev.pressure_error()
             if self.b == 0:
                 pressure = self.dev.pressure()
-                print(pressure)
+                #print(pressure)
                 self.pub_p.publish(pressure)
                 continue
             else:
@@ -36,7 +36,7 @@ class tpg261_driver(object):
                       self.pub_er.publish(msg)
                  else:
                      error = self.dev.pressure_error()
-                     print(error)
+                #     print(error)
                      pass
 
 if __name__ == "__main__" :
