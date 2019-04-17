@@ -15,8 +15,8 @@ class tpg261_driver(object):
     def query_pressure(self):
         while not rospy.is_shutdown():
             self.dev.pressure_device()
-            self.dev.check()
-            if a == 0:
+            b = self.dev.check()
+            if b == 0:
                 continue
             else:
                  if status == b'2':
