@@ -34,7 +34,7 @@ if __name__ == "__main__" :
     tpg = tpg261_driver()
     thread_tpg = threading.Thread(target=tpg.query_pressure)
     thread_tpg.start()
-    tpg.query_pressure()
+
 
 #2019
 #written by T.Takashima
