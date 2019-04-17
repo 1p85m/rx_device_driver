@@ -21,6 +21,7 @@ class tpg261_driver(object):
             self.b = self.dev.check()
             pressure = self.dev.pressure()
             status = self.dev.pressure_error()
+            print(pressure)
             if self.b == 0:
                 pressure = tpg261.pressure_device()
                 self.pub_p.publish(pressure)
