@@ -25,7 +25,7 @@ class tpg261_driver(object):
                 print(pressure)
                 pressure1 = pressure.lstrip("b")
                 print(pressure1)
-                pres = float(pressure)
+            #    pres = float(pressure)
                 self.pub_p.publish(pres)
                 continue
             else:
