@@ -22,7 +22,6 @@ class tpg261_driver(object):
             status = self.dev.pressure_error()
             if self.b == 0:
                 pressure = self.dev.pressure()
-                print(pressure)
                 pressure1 = pressure.strip("b'")
                 print(pressure1)
                 pres = float(pressure1)
