@@ -8,25 +8,8 @@ import pymeasure
 import rospy
 from std_msgs.msg import Float64
 
+from pymeasure_l218 import l218
 
-class lakeshore218_driver(object):
-
-    def __init__(self, IP='', GPIB=1):
-        self.IP = IP
-        self.GPIB = GPIB
-        self.com = pymeasure.gpib_prologix(self.IP, self.GPIB)
-
-    def measure(self):
-        self.com.open()
-        self.com.send('KRDG?')
-        raw = self.com.readline()
-        ret = raw.strip().split(',')
-        self.com.close()
-        temperature = list(map(float, ret))
-        
-        return temperature
-
-    
 def str2list(param):
     return param.strip('[').strip(']').split(',')
 
@@ -44,7 +27,7 @@ if __name__ == '__main__':
     onoff_list = list(map(int, str2list(rospy.get_param('~onoff'))))
 
     try:
-        temp = lakeshore218_driver(host, port)
+        temp = l218.lakeshore218_driver(host, port)
     except OSError as e:
         rospy.logerr("{e.strerror}. host={host}".format(**locals()))
         sys.exit()
@@ -64,4 +47,3 @@ if __name__ == '__main__':
                 pub.publish(msg)
             else: pass
         continue
-
