@@ -23,7 +23,6 @@ class tpg261_driver(object):
             if self.b == 0:
                 pressure = self.dev.pressure()
                 pres = float(pressure)
-                self.pub_p.publish('{:.2E}'.format(pres))
                 continue
             else:
                  if status == b'2':
