@@ -25,8 +25,8 @@ class tpg261_driver(object):
                 print(pressure)
                 pressure1 = pressure.strip()
                 print(pressure1)
-                pres = float(pressure)
-                self.pub_p.publish(pres)
+                #pres = float(pressure)
+                #self.pub_p.publish(pres)
                 continue
             else:
                  if status == b'2':
