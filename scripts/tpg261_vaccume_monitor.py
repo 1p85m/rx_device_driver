@@ -45,7 +45,7 @@ class tpg261_driver(object):
         self.dev.gauge_query()
         self.dev.gague1_check()
         self.dev.gague2_check()
-
+        print(status1)
         if status1 == b'0':
             msg = String()
             msg.data = CannotBeChanged
