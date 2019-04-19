@@ -48,30 +48,30 @@ class tpg261_driver(object):
         print(status1)
         if status1 == b'0':
             msg = String()
-            msg.data = CannotBeChanged
+            msg.data = "CannotBeChanged"
             self.pub_g1.publish(msg)
         elif status1 == b'1':
             msg = String()
-            msg.data = TurnedOff
+            msg.data = "TurnedOff"
             self.pub_g1.publish(msg)
         elif status1 == b'2':
             msg = String()
-            msg.data = TurnedOn
+            msg.data = "TurnedOn"
             self.pub_g1.publish(msg)
         else:
             pass
 
         if status2 == b'0':
             msg = String()
-            msg.data = CannotBeChanged
+            msg.data = "CannotBeChanged"
             self.pub_g2.publish(msg)
         elif status2 == b'1':
             msg = String()
-            msg.data = TurnedOff
+            msg.data = "TurnedOff"
             self.pub_g2.publish(msg)
         elif status2 == b'2':
             msg = String()
-            msg.data = TurnedOn
+            msg.data = "TurnedOn"
             self.pub_g2.publish(msg)
         else:
             pass
