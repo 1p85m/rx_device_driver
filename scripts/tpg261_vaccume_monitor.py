@@ -9,9 +9,10 @@ from pymeasure_tpg261 import tpg261
 class tpg261_driver(object):
     def __init__(self):
 
-        self.pub_er = rospy.Publisher("/tpg_error", String, queue_size=1)
         self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
-
+        self.pub_er = rospy.Publisher("/tpg_error", String, queue_size=1)
+        self.pub_g1 = rospy.Publisher("/tpg_gauge1", String, queue_size=1)
+        self.pub_g2 = rospy.Publisher("/tpg_gauge2", String, queue_size=1)
         self.dev = tpg261.device()
 
     def query_pressure(self):
@@ -39,6 +40,42 @@ class tpg261_driver(object):
                      self.pub_er.publish(error)
                      pass
 
+
+    def check_gauge(self):
+        self.dev.gauge_query()
+        self.dev.gague1_check()
+        self.dev.gague2_check()
+
+        if status1 == b'0':
+            msg = String()
+            msg.data = CannotBeChanged
+            self.pub_g1.publish(msg)
+        elif status1 == b'1':
+            msg = String()
+            msg.data = TurnedOff
+            self.pub_g1.publish(msg)
+        elif status1 == b'2':
+            msg = String()
+            msg.data = TurnedOn
+            self.pub_g1.publish(msg)
+        else:
+            pass
+
+        if status2 == b'0':
+            msg = String()
+            msg.data = CannotBeChanged
+            self.pub_g2.publish(msg)
+        elif status2 == b'1':
+            msg = String()
+            msg.data = TurnedOff
+            self.pub_g2.publish(msg)
+        elif status2 == b'2':
+            msg = String()
+            msg.data = TurnedOn
+            self.pub_g2.publish(msg)
+        else:
+            pass
+
 '''
     def query_bothpressure(self):
         while not rospy.is_shutdown():
@@ -59,38 +96,6 @@ class tpg261_driver(object):
 
 
 
-    def check_gauge(self):
-        self.dev.gauge_check()
-
-        if status1 == b'0':
-            msg = String()
-            msg.data = CannotBeChanged
-            self.pub_p.publish(msg)
-        elif status1 == b'1':
-            msg = String()
-            msg.data = TurnedOff
-            self.pub_p.publish(msg)
-        elif status1 == b'2':
-            msg = String()
-            msg.data = TurnedOn
-            self.pub_p.publish(msg)
-        else:
-            pass
-
-        if status2 == b'0':
-            msg = String()
-            msg.data = CannotBeChanged
-            self.pub_p.publish(msg)
-        elif status2 == b'1':
-            msg = String()
-            msg.data = TurnedOff
-            self.pub_p.publish(msg)
-        elif status2 == b'2':
-            msg = String()
-            msg.data = TurnedOn
-            self.pub_p.publish(msg)
-        else:
-            pass
 
 
     def turn_gauge(self):
