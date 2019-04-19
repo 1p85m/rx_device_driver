@@ -13,6 +13,7 @@ class tpg261_driver(object):
         self.pub_er = rospy.Publisher("/tpg_error", String, queue_size=1)
         self.pub_g1 = rospy.Publisher("/tpg_gauge1", String, queue_size=1)
         self.pub_g2 = rospy.Publisher("/tpg_gauge2", String, queue_size=1)
+        self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 
     def query_pressure(self):
@@ -75,6 +76,35 @@ class tpg261_driver(object):
             msg = String()
             msg.data = "TurnedOn"
             self.pub_g2.publish(msg)
+        else:
+            pass
+
+    def change_unit_bar(self):
+        self.dev.pres_unit_bar()
+        unit = self.dev.pres_unit_bar()
+        if unit == b'0':
+            msg = String()
+            msg.data = "mbarORbar"
+            self.pub_uni.publish(msg)
+        else:
+            pass
+
+    def change_unit_torr(self):
+        self.dev.pres_unit_torr()
+        unit = self.dev.pres_unit_torr()
+        if unit == b'1':
+            msg = String()
+            msg.data = "Torr"
+            self.pub_uni.publish(msg)
+        else:
+            pass
+    def change_unit_pa(self):
+        self.dev.pres_unit_pa()
+        unit = self.dev.pres_unit_pa()
+        if unit == b'2':
+            msg = String()
+            msg.data = "Pascal"
+            self.pub_uni.publish(msg)
         else:
             pass
 
