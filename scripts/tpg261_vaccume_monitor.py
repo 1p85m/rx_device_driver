@@ -41,7 +41,7 @@ class tpg261_driver(object):
                      pass
 
 
-    def check_gauge(self):
+'''    def check_gauge(self):
         self.dev.gauge_query()
         print(status1)
         self.dev.gauge1_check()
@@ -77,7 +77,7 @@ class tpg261_driver(object):
         else:
             pass
 
-'''
+
     def query_bothpressure(self):
         while not rospy.is_shutdown():
             self.dev.pressure_both()
@@ -174,8 +174,8 @@ if __name__ == "__main__" :
     tpg = tpg261_driver()
     thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
     thread_tpg_pres.start()
-    thread_tpg_gague = threading.Thread(target=tpg.check_gauge)
-    thread_tpg_gague.start()
+    #thread_tpg_gague = threading.Thread(target=tpg.check_gauge)
+    #thread_tpg_gague.start()
 
 
 
