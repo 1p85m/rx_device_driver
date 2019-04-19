@@ -43,8 +43,8 @@ class tpg261_driver(object):
 
     def check_gauge(self):
         self.dev.gauge_query()
-        self.dev.gague1_check()
-        self.dev.gague2_check()
+        self.dev.gauge1_check()
+        self.dev.gauge2_check()
         print(status1)
         if status1 == b'0':
             msg = String()
