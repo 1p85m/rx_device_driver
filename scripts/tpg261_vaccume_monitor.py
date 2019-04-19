@@ -29,11 +29,11 @@ class tpg261_driver(object):
             else:
                  if status == b'2':
                       msg = String()
-                      msg.data = Overrange
+                      msg.data = "Overrange"
                       self.pub_er.publish(msg)
                  elif status == b'0':
                       msg = String()
-                      msg.data = pressure
+                      msg.data = "pressure"
                       self.pub_er.publish(msg)
                  else:
                      error = self.dev.pressure_error()
