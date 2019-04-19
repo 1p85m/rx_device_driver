@@ -46,6 +46,8 @@ class tpg261_driver(object):
         print(status1)
         self.dev.gauge1_check()
         self.dev.gauge2_check()
+        status1 = self.dev.gauge1_check()
+        status2 = self.dev.gauge2_check()
 
         if status1 == b'0':
             msg = String()
