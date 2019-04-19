@@ -172,8 +172,10 @@ class tpg261_driver(object):
 if __name__ == "__main__" :
     rospy.init_node("tpg261")
     tpg = tpg261_driver()
-    thread_tpg = threading.Thread(target=tpg.query_pressure)
-    thread_tpg.start()
+    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
+    thread_tpg_pres.start()
+    thread_tpg_gague = threading.Thread(target=tpg.check_gauge)
+    thread_tpg_gague.start()
 
 
 
