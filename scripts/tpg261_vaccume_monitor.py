@@ -43,9 +43,10 @@ class tpg261_driver(object):
 
     def check_gauge(self):
         self.dev.gauge_query()
+        print(status1)
         self.dev.gauge1_check()
         self.dev.gauge2_check()
-        
+
         if status1 == b'0':
             msg = String()
             msg.data = "CannotBeChanged"
