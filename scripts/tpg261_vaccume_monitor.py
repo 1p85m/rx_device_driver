@@ -20,18 +20,18 @@ class tpg261_driver(object):
             self.dev.pressure()
             self.dev.pressure_error()
             self.b = self.dev.check()
-            status = self.dev.pressure_error()
+            status_p = self.dev.pressure_error()
             if self.b == 0:
                 pressure = self.dev.pressure()
                 pres = float(pressure)
                 self.pub_p.publish(pres)
                 continue
             else:
-                 if status == b'2':
+                 if status_p == b'2':
                       msg = String()
                       msg.data = "Overrange"
                       self.pub_er.publish(msg)
-                 elif status == b'0':
+                 elif status_p == b'0':
                       msg = String()
                       msg.data = "pressure"
                       self.pub_er.publish(msg)
@@ -45,34 +45,33 @@ class tpg261_driver(object):
         self.dev.gauge_query()
         self.dev.gauge1_check()
         self.dev.gauge2_check()
-        status1 = self.dev.gauge1_check()
-        status2 = self.dev.gauge2_check()
+        status1_g = self.dev.gauge1_check()
+        status2_g = self.dev.gauge2_check()
 
-        if status1 == b'0':
+        if status1_g == b'0':
             msg = String()
             msg.data = "CannotBeChanged"
             self.pub_g1.publish(msg)
-        elif status1 == b'1':
+        elif status1_g == b'1':
             msg = String()
             msg.data = "TurnedOff"
             self.pub_g1.publish(msg)
-        elif status1 == b'2':
+        elif status1_g == b'2':
             msg = String()
             msg.data = "TurnedOn"
             self.pub_g1.publish(msg)
         else:
-            print(aknn)
             pass
 
-        if status2 == b'0':
+        if status2_g == b'0':
             msg = String()
             msg.data = "CannotBeChanged"
             self.pub_g2.publish(msg)
-        elif status2 == b'1':
+        elif status2_g == b'1':
             msg = String()
             msg.data = "TurnedOff"
             self.pub_g2.publish(msg)
-        elif status2 == b'2':
+        elif status2_g == b'2':
             msg = String()
             msg.data = "TurnedOn"
             self.pub_g2.publish(msg)
