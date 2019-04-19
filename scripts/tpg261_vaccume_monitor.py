@@ -62,6 +62,7 @@ class tpg261_driver(object):
             msg.data = "TurnedOn"
             self.pub_g1.publish(msg)
         else:
+            print(aknn)
             pass
 
         if status2 == b'0':
