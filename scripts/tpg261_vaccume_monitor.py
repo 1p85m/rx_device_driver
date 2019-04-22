@@ -59,7 +59,7 @@ class tpg261_driver(object):
     def check_gague_s(self):
         self.tpg.check_gauge()
 
-    def check_gauge(self):
+    def check_gauge(self,q):
         self.pres_flag = 0
         time.sleep(1)
         self.dev.gauge_query()
@@ -100,7 +100,7 @@ class tpg261_driver(object):
 
         self.pres_flag = 1
 
-    def change_unit_bar(self):
+    def change_unit_bar(self,q):
         self.pres_flag = 0
         time.sleep(1)
         self.dev.pres_unit_bar()
@@ -113,7 +113,7 @@ class tpg261_driver(object):
             pass
         self.pres_flag = 1
 
-    def change_unit_torr(self):
+    def change_unit_torr(self,q):
         self.pres_flag = 0
         time.sleep(1)
         self.dev.pres_unit_torr()
@@ -126,7 +126,7 @@ class tpg261_driver(object):
             pass
         self.pres_flag = 1
 
-    def change_unit_pa(self):
+    def change_unit_pa(self,q):
         self.pres_flag = 0
         time.sleep(1)
         self.dev.pres_unit_pa()
