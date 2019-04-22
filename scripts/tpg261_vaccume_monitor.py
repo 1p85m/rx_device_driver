@@ -101,6 +101,8 @@ class tpg261_driver(object):
         self.pres_flag = 1
 
     def change_unit_bar(self):
+        self.pres_flag = 0
+        time.sleep(1)
         self.dev.pres_unit_bar()
         unit = self.dev.pres_unit_bar()
         if unit == b'0':
@@ -109,8 +111,11 @@ class tpg261_driver(object):
             self.pub_uni.publish(msg)
         else:
             pass
+        self.pres_flag = 1
 
     def change_unit_torr(self):
+        self.pres_flag = 0
+        time.sleep(1)
         self.dev.pres_unit_torr()
         unit = self.dev.pres_unit_torr()
         if unit == b'1':
@@ -119,7 +124,11 @@ class tpg261_driver(object):
             self.pub_uni.publish(msg)
         else:
             pass
+        self.pres_flag = 1
+
     def change_unit_pa(self):
+        self.pres_flag = 0
+        time.sleep(1)
         self.dev.pres_unit_pa()
         unit = self.dev.pres_unit_pa()
         if unit == b'2':
@@ -128,6 +137,7 @@ class tpg261_driver(object):
             self.pub_uni.publish(msg)
         else:
             pass
+        self.pres_flag = 1
 
 '''
     def query_bothpressure(self):
