@@ -28,7 +28,7 @@ class tpg261_driver(object):
         while not rospy.is_shutdown():
 
             while self.pres_flag == 0 :
-            continue
+                continue
 
             while self.pres_flag == 1 :
 
