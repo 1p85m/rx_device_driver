@@ -44,7 +44,6 @@ if __name__ == '__main__':
             msg = Float64()
             if onoff == 1:
                 msg.data = ret[idx]
-                print(msg)
                 pub.publish(msg)
             else: pass
         continue
