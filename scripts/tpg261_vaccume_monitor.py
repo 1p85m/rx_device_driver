@@ -10,7 +10,7 @@ class tpg261_driver(object):
     def __init__(self):
 
         self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
-        self.sub_p = rospy.Subscriber("/tpg_pres_sub", Int32, self.pres_switch)
+        self.sub_p = rospy.Subscriber("/tpg_pres_sub", Float64, self.pres_switch)
         self.pub_er = rospy.Publisher("/tpg_error", String, queue_size=1)
         self.pub_g1 = rospy.Publisher("/tpg_gauge1", String, queue_size=1)
         self.pub_g2 = rospy.Publisher("/tpg_gauge2", String, queue_size=1)
