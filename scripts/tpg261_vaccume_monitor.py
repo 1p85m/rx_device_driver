@@ -20,7 +20,7 @@ class tpg261_driver(object):
         self.pres_flag = 1
 
 #switch
-    def pres_switch(self.q):
+    def pres_switch(self,q):
         self.pres_flag = q.data
         return
 
