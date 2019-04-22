@@ -10,39 +10,58 @@ class tpg261_driver(object):
     def __init__(self):
 
         self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
+        self.sub_p = Subscriber("/tpg_pres_sub", Int32, self.pres_switch)
         self.pub_er = rospy.Publisher("/tpg_error", String, queue_size=1)
         self.pub_g1 = rospy.Publisher("/tpg_gauge1", String, queue_size=1)
         self.pub_g2 = rospy.Publisher("/tpg_gauge2", String, queue_size=1)
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
+#flag
+        self.pres_flag = 1
+
+#switch
+    def pres_switch(self.q):
+        self.pres_flag = q.data
+        return
 
     def query_pressure(self):
         while not rospy.is_shutdown():
-            self.dev.pressure()
-            self.dev.pressure_error()
-            self.b = self.dev.check()
-            status_p = self.dev.pressure_error()
-            if self.b == 0:
-                pressure = self.dev.pressure()
-                pres = float(pressure)
-                self.pub_p.publish(pres)
-                continue
-            else:
-                 if status_p == b'2':
-                      msg = String()
-                      msg.data = "Overrange"
-                      self.pub_er.publish(msg)
-                 elif status_p == b'0':
-                      msg = String()
-                      msg.data = "pressure"
-                      self.pub_er.publish(msg)
-                 else:
-                     error = self.dev.pressure_error()
-                     self.pub_er.publish(error)
-                     pass
 
+            while self.pres_flag == 0 :
+            continue
+
+            while self.pres_flag == 1 :
+
+                self.dev.pressure()
+                self.dev.pressure_error()
+                self.b = self.dev.check()
+                status_p = self.dev.pressure_error()
+                if self.b == 0:
+                    pressure = self.dev.pressure()
+                    pres = float(pressure)
+                    self.pub_p.publish(pres)
+                    continue
+                else:
+                    if status_p == b'2':
+                        msg = String()
+                        msg.data = "Overrange"
+                        self.pub_er.publish(msg)
+                    elif status_p == b'0':
+                        msg = String()
+                        msg.data = "pressure"
+                        self.pub_er.publish(msg)
+                    else:
+                        error = self.dev.pressure_error()
+                        self.pub_er.publish(error)
+                        pass
+
+#subのなかにpubを置く
+    def check_gague_s(self):
+        self.tpg.check_gauge()
 
     def check_gauge(self):
+        self.pres_flag = 0
+        time.sleep(1)
         self.dev.gauge_query()
         self.dev.gauge1_check()
         self.dev.gauge2_check()
@@ -78,6 +97,8 @@ class tpg261_driver(object):
             self.pub_g2.publish(msg)
         else:
             pass
+
+        self.pres_flag = 1
 
     def change_unit_bar(self):
         self.dev.pres_unit_bar()
@@ -205,8 +226,7 @@ if __name__ == "__main__" :
     tpg = tpg261_driver()
     thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
     thread_tpg_pres.start()
-    #thread_tpg_gague = threading.Thread(target=tpg.check_gauge)
-    #thread_tpg_gague.start()
+
 
 
 
