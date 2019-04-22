@@ -25,6 +25,7 @@ if __name__ == '__main__':
     port = rospy.get_param('~port')
     rate = rospy.get_param('~rate')
     onoff_list = list(map(int, str2list(rospy.get_param('~onoff'))))
+    print(onoff_list)
 
     try:
         temp = l218.lakeshore218_driver(host, port)
@@ -44,6 +45,7 @@ if __name__ == '__main__':
             msg = Float64()
             if onoff == 1:
                 msg.data = ret[idx]
+                print(msg)
                 pub.publish(msg)
             else: pass
         continue
