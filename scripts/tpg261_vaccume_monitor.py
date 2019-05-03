@@ -57,7 +57,7 @@ class tpg261_driver(object):
     #def check_gague_s(self):
     #    self.tpg.check_gauge()
 '''
-   def check_gauge(self):
+    def check_gauge(self):
         while not rospy.is_shutdown():
             while self.pres_flag == 1 :
                 continue
