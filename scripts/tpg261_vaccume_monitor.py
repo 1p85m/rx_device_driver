@@ -105,7 +105,7 @@ def check_gauge(self):
 
                 self.pres_flag = 1
 
-    def change_unit_bar(self,q):
+    def change_unit_bar(self,q) :
         self.pres_flag = 0
         time.sleep(1)
         self.dev.pres_unit_bar()
