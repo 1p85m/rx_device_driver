@@ -19,7 +19,7 @@ class tpg261_driver(object):
 #flag
         self.pres_flag = 2
         '''
-        0:cheks gague
+        0:check gague
         1:pressure
         2:unit
 
@@ -294,10 +294,10 @@ class tpg261_driver(object):
 if __name__ == "__main__" :
     rospy.init_node("tpg261")
     tpg = tpg261_driver()
-    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
-    thread_tpg_pres.start()
-    thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
-    thread_tpg_gauge.start()
+    #thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
+    #thread_tpg_pres.start()
+    #thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
+    #thread_tpg_gauge.start()
     thread_tpg_unit = threading.Thread(target=tpg.change_unit)
     thread_tpg_unit.start()
 
