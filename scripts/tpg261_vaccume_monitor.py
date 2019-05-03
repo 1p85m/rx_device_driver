@@ -104,8 +104,8 @@ def check_gauge(self):
                     pass
 
                 self.pres_flag = 1
-
-    def change_unit_bar(self,q) :
+'''
+    def change_unit_bar(self,q):
         self.pres_flag = 0
         time.sleep(1)
         self.dev.pres_unit_bar()
@@ -143,7 +143,7 @@ def check_gauge(self):
         else:
             pass
         self.pres_flag = 1
-
+'''
 '''
     def query_bothpressure(self):
         while not rospy.is_shutdown():
