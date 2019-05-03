@@ -72,30 +72,30 @@ subのなかにpubを置く
 
                 if status1_g == b'0':
                     msg = String()
-                    msg.data = "CannotBeChanged"
+                    msg.data = "CannotBeChanged1"
                     self.pub_g1.publish(msg)
                 elif status1_g == b'1':
                     msg = String()
-                    msg.data = "TurnedOff"
+                    msg.data = "TurnedOff1"
                     self.pub_g1.publish(msg)
                 elif status1_g == b'2':
                     msg = String()
-                    msg.data = "TurnedOn"
+                    msg.data = "TurnedOn1"
                     self.pub_g1.publish(msg)
                 else:
                     pass
 
                 if status2_g == b'0':
                     msg = String()
-                    msg.data = "CannotBeChanged"
+                    msg.data = "CannotBeChanged2"
                     self.pub_g2.publish(msg)
                 elif status2_g == b'1':
                     msg = String()
-                    msg.data = "TurnedOff"
+                    msg.data = "TurnedOff2"
                     self.pub_g2.publish(msg)
                 elif status2_g == b'2':
                     msg = String()
-                    msg.data = "TurnedOn"
+                    msg.data = "TurnedOn2"
                     self.pub_g2.publish(msg)
                 else:
                     pass
