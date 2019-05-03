@@ -115,7 +115,7 @@ class tpg261_driver(object):
                 self.pres_flag = 1
 
 
-   def chage_unit(self):
+    def chage_unit(self):
         while not rospy.is_shutdown():
             while self.pres_flag == 0 or 1 :
                 continue
