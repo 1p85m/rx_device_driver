@@ -17,7 +17,7 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 2
+        self.pres_flag = 1
         '''
         0:check gague
         1:pressure
@@ -134,7 +134,7 @@ class tpg261_driver(object):
                         self.pub_uni.publish(msg)
                     else:
                         pass
-                    self.pres_flag = 1
+        #            self.pres_flag = 1
 
                 elif self.unit_flag == 1:
                     unit = self.dev.pres_unit_torr()
@@ -144,7 +144,7 @@ class tpg261_driver(object):
                         self.pub_uni.publish(msg)
                     else:
                         pass
-                    self.pres_flag = 1
+        #            self.pres_flag = 1
 
                 elif self.unit_flag == 2:
                     unit = self.dev.pres_unit_bar()
@@ -154,7 +154,7 @@ class tpg261_driver(object):
                         self.pub_uni.publish(msg)
                     else:
                         pass
-                    self.pres_flag = 1
+        #            self.pres_flag = 1
                 else:
                     pass
 
