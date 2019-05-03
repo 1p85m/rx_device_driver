@@ -18,6 +18,18 @@ class tpg261_driver(object):
         self.dev = tpg261.device()
 #flag
         self.pres_flag = 1
+        '''
+        0:cheks gague
+        1:pressure
+        2:
+
+        '''
+        self.unit_flag = 0
+        '''
+        0:bar
+        1:torr
+        2:pa
+        '''
 
 #switch
     def pres_switch(self,q):
@@ -26,7 +38,7 @@ class tpg261_driver(object):
 
     def query_pressure(self):
         while not rospy.is_shutdown():
-            while self.pres_flag == 0 :
+            while self.pres_flag == 0 or 2 :
                 continue
 
             while self.pres_flag == 1 :
@@ -59,12 +71,12 @@ class tpg261_driver(object):
 
     def check_gauge(self):
         while not rospy.is_shutdown():
-            while self.pres_flag == 1 :
+            while self.pres_flag == 1 or 2 :
                 continue
 
             while self.pres_flag == 0 :
 
-            #    self.pres_flag = 0
+                self.pres_flag = 0
                 time.sleep(1)
                 self.dev.gauge_query()
                 status1_g = self.dev.gauge1_check()
@@ -101,6 +113,47 @@ class tpg261_driver(object):
                     pass
 
                 self.pres_flag = 1
+
+
+   def chage_unit(self):
+        while not rospy.is_shutdown():
+            while self.pres_flag == 0 or 1 :
+                continue
+
+            while self.pres_flag == 2 :
+                self.pres_flag = 2
+                time.sleep(1)
+
+                if self.unit_flag = 0:
+                    unit = self.dev.pres_unit_bar()
+                    if unit == b'0':
+                        msg = String()
+                        msg.data = "mbarORbar"
+                        self.pub_uni.publish(msg)
+                    else:
+                        pass
+                    self.pres_flag = 1
+
+                if self.unit_flag = 1:
+                    unit = self.dev.pres_unit_torr()
+                    if unit == b'1':
+                        msg = String()
+                        msg.data = "Torr"
+                        self.pub_uni.publish(msg)
+                    else:
+                        pass
+                    self.pres_flag = 1
+
+                if self.unit_flag = 0:
+                    unit = self.dev.pres_unit_bar()
+                    if unit == b'2':
+                        msg = String()
+                        msg.data = "Pascal"
+                        self.pub_uni.publish(msg)
+                    else:
+                        pass
+                    self.pres_flag = 1
+
 
 '''
     def change_unit_bar(self,q):
@@ -241,7 +294,8 @@ if __name__ == "__main__" :
     thread_tpg_pres.start()
     thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
     thread_tpg_gauge.start()
-
+    thread_tpg_unit = threading.Thread(target=tpg.change_unit)
+    thread_tpg_unit.start()
 
 
 
