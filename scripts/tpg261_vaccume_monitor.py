@@ -24,7 +24,7 @@ class tpg261_driver(object):
         2:unit
 
         '''
-        self.unit_flag = 0
+        self.unit_flag = 1
         '''
         0:bar
         1:torr
