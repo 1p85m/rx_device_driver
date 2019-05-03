@@ -18,7 +18,7 @@ class tpg261_driver(object):
         self.dev = tpg261.device()
 #flag
 
-    self.pres_flag = 1
+    pres_flag = 1
 
 #switch
     def pres_switch(self,q):
