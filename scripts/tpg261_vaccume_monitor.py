@@ -118,7 +118,7 @@ class tpg261_driver(object):
     def change_unit(self):
         while not rospy.is_shutdown():
             while self.pres_flag == 0 or 1 :
-                print('akan')
+                print('akan1')
                 continue
 
             while self.pres_flag == 2 :
