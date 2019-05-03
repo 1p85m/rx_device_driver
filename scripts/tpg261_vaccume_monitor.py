@@ -23,15 +23,13 @@ class tpg261_driver(object):
     def pres_switch(self,q):
         self.pres_flag = q.data
         return
-
+'''
     def query_pressure(self):
         while not rospy.is_shutdown():
-            print(self.pres_flag)
             while self.pres_flag == 0 :
                 continue
 
             while self.pres_flag == 1 :
-                print(self.pres_flag)
                 self.dev.pressure()
                 self.dev.pressure_error()
                 self.b = self.dev.check()
@@ -104,7 +102,7 @@ class tpg261_driver(object):
                     pass
 
                 self.pres_flag = 1
-                '''
+                
 '''
     def change_unit_bar(self,q):
         self.pres_flag = 0
@@ -240,10 +238,10 @@ class tpg261_driver(object):
 if __name__ == "__main__" :
     rospy.init_node("tpg261")
     tpg = tpg261_driver()
-    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
-    thread_tpg_pres.start()
-    #thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
-    #thread_tpg_gauge.start()
+    #thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
+    #thread_tpg_pres.start()
+    thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
+    thread_tpg_gauge.start()
 
 
 
