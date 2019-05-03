@@ -58,7 +58,7 @@ class tpg261_driver(object):
 #subのなかにpubを置く
     #def check_gague_s(self):
     #    self.tpg.check_gauge()
-
+'''
     def check_gauge(self):
         while not rospy.is_shutdown():
 
@@ -104,6 +104,7 @@ class tpg261_driver(object):
                     pass
 
                 self.pres_flag = 1
+                '''
 '''
     def change_unit_bar(self,q):
         self.pres_flag = 0
@@ -241,8 +242,8 @@ if __name__ == "__main__" :
     tpg = tpg261_driver()
     thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
     thread_tpg_pres.start()
-    thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
-    thread_tpg_gauge.start()
+    #thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
+    #thread_tpg_gauge.start()
 
 
 
