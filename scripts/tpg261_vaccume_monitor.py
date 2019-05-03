@@ -31,7 +31,7 @@ class tpg261_driver(object):
                 continue
 
             while self.pres_flag == 1 :
-                print(pres_flag)
+                print('pres_flag')
                 self.dev.pressure()
                 self.dev.pressure_error()
                 self.b = self.dev.check()
