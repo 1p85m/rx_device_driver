@@ -123,6 +123,7 @@ class tpg261_driver(object):
             while self.pres_flag == 2 :
                 self.pres_flag = 2
                 time.sleep(1)
+                print('akan')
 
                 if self.unit_flag == 0:
                     unit = self.dev.pres_unit_bar()
@@ -134,7 +135,7 @@ class tpg261_driver(object):
                         pass
                     self.pres_flag = 1
 
-                if self.unit_flag == 1:
+                elif self.unit_flag == 1:
                     unit = self.dev.pres_unit_torr()
                     if unit == b'1':
                         msg = String()
@@ -144,7 +145,7 @@ class tpg261_driver(object):
                         pass
                     self.pres_flag = 1
 
-                if self.unit_flag == 2:
+                elif self.unit_flag == 2:
                     unit = self.dev.pres_unit_bar()
                     if unit == b'2':
                         msg = String()
@@ -153,6 +154,8 @@ class tpg261_driver(object):
                     else:
                         pass
                     self.pres_flag = 1
+                else:
+                    pass
 
 
 '''
