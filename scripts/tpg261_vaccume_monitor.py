@@ -59,13 +59,12 @@ class tpg261_driver(object):
 '''
     def check_gauge(self):
         while not rospy.is_shutdown():
-
             while self.pres_flag == 1 :
                 continue
 
             while self.pres_flag == 0 :
 
-                self.pres_flag = 0
+            #    self.pres_flag = 0
                 time.sleep(1)
                 self.dev.gauge_query()
                 status1_g = self.dev.gauge1_check()
@@ -101,8 +100,8 @@ class tpg261_driver(object):
                 else:
                     pass
 
-                self.pres_flag = 1
-                
+        #        self.pres_flag = 1
+
 '''
     def change_unit_bar(self,q):
         self.pres_flag = 0
