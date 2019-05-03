@@ -103,7 +103,7 @@ def check_gauge(self):
                 else:
                     pass
 
-            self.pres_flag = 1
+                self.pres_flag = 1
 
     def change_unit_bar(self,q):
         self.pres_flag = 0
