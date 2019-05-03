@@ -38,7 +38,7 @@ class tpg261_driver(object):
 
     def query_pressure(self):
         while not rospy.is_shutdown():
-            while self.pres_flag == 0 or 2 :
+            while self.pres_flag != 1 :
                 continue
 
             while self.pres_flag == 1 :
@@ -71,7 +71,7 @@ class tpg261_driver(object):
 
     def check_gauge(self):
         while not rospy.is_shutdown():
-            while self.pres_flag == 1 or 2 :
+            while self.pres_flag != 0 :
                 continue
 
             while self.pres_flag == 0 :
@@ -117,7 +117,7 @@ class tpg261_driver(object):
 
     def change_unit(self):
         while not rospy.is_shutdown():
-            while self.pres_flag == 0 or 1 :
+            while self.pres_flag != 2:
                 print('akan1')
                 continue
 
