@@ -17,18 +17,17 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 0
+        self.pres_flag = 1
 
 #switch
     def pres_switch(self,q):
         self.pres_flag = q.data
         return
-
+'''
     def query_pressure(self):
         while not rospy.is_shutdown():
 
             while self.pres_flag == 0 :
-                self.check_gauge()
                 continue
 
             while self.pres_flag == 1 :
@@ -55,49 +54,55 @@ class tpg261_driver(object):
                         error = self.dev.pressure_error()
                         self.pub_er.publish(error)
                         pass
-
+'''
 #subのなかにpubを置く
     def check_gague_s(self):
         self.tpg.check_gauge()
 
     def check_gauge(self):
-        self.pres_flag = 0
-        time.sleep(1)
-        self.dev.gauge_query()
-        status1_g = self.dev.gauge1_check()
-        status2_g = self.dev.gauge2_check()
+        while not rospy.is_shutdown():
 
-        if status1_g == b'0':
-            msg = String()
-            msg.data = "CannotBeChanged"
-            self.pub_g1.publish(msg)
-        elif status1_g == b'1':
-            msg = String()
-            msg.data = "TurnedOff"
-            self.pub_g1.publish(msg)
-        elif status1_g == b'2':
-            msg = String()
-            msg.data = "TurnedOn"
-            self.pub_g1.publish(msg)
-        else:
-            pass
+            while self.pres_flag ==1 :
+                continue
+            while self.pres_flag == 0 :
 
-        if status2_g == b'0':
-            msg = String()
-            msg.data = "CannotBeChanged"
-            self.pub_g2.publish(msg)
-        elif status2_g == b'1':
-            msg = String()
-            msg.data = "TurnedOff"
-            self.pub_g2.publish(msg)
-        elif status2_g == b'2':
-            msg = String()
-            msg.data = "TurnedOn"
-            self.pub_g2.publish(msg)
-        else:
-            pass
+                self.pres_flag = 0
+                time.sleep(1)
+                self.dev.gauge_query()
+                status1_g = self.dev.gauge1_check()
+                status2_g = self.dev.gauge2_check()
 
-        self.pres_flag = 1
+                if status1_g == b'0':
+                    msg = String()
+                    msg.data = "CannotBeChanged"
+                    self.pub_g1.publish(msg)
+                elif status1_g == b'1':
+                    msg = String()
+                    msg.data = "TurnedOff"
+                    self.pub_g1.publish(msg)
+                elif status1_g == b'2':
+                    msg = String()
+                    msg.data = "TurnedOn"
+                    self.pub_g1.publish(msg)
+                else:
+                    pass
+
+                if status2_g == b'0':
+                    msg = String()
+                    msg.data = "CannotBeChanged"
+                self.pub_g2.publish(msg)
+            elif status2_g == b'1':
+                msg = String()
+                msg.data = "TurnedOff"
+                self.pub_g2.publish(msg)
+            elif status2_g == b'2':
+                msg = String()
+                msg.data = "TurnedOn"
+                self.pub_g2.publish(msg)
+            else:
+                pass
+
+            self.pres_flag = 1
 
     def change_unit_bar(self,q):
         self.pres_flag = 0
@@ -233,8 +238,10 @@ class tpg261_driver(object):
 if __name__ == "__main__" :
     rospy.init_node("tpg261")
     tpg = tpg261_driver()
-    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
-    thread_tpg_pres.start()
+#    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
+#    thread_tpg_pres.start()
+    thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
+    thread_tpg_gauge.start()
 
 
 
