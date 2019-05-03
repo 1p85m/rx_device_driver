@@ -17,7 +17,7 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 1
+        self.pres_flag = 2
         '''
         0:check gague
         1:pressure
@@ -118,13 +118,11 @@ class tpg261_driver(object):
     def change_unit(self):
         while not rospy.is_shutdown():
             while self.pres_flag != 2:
-                print('akan1')
                 continue
 
             while self.pres_flag == 2 :
                 self.pres_flag = 2
                 time.sleep(1)
-                print('akan')
 
                 if self.unit_flag == 0:
                     unit = self.dev.pres_unit_bar()
