@@ -17,14 +17,14 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 1
+        self.pres_flag = 2
         '''
         0:check gague
         1:pressure
         2:unit
 
         '''
-        self.unit_flag = 1
+        self.unit_flag = 2
         '''
         0:bar
         1:torr
