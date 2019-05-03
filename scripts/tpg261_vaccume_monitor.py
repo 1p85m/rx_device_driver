@@ -17,7 +17,7 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 1
+        self.pres_flag = 0
 
 #switch
     def pres_switch(self,q):
@@ -28,6 +28,7 @@ class tpg261_driver(object):
         while not rospy.is_shutdown():
 
             while self.pres_flag == 0 :
+                self.tpg.check_gauge()
                 continue
 
             while self.pres_flag == 1 :
