@@ -63,8 +63,6 @@ class tpg261_driver(object):
         self.pres_flag = 0
         time.sleep(1)
         self.dev.gauge_query()
-        self.dev.gauge1_check()
-        self.dev.gauge2_check()
         status1_g = self.dev.gauge1_check()
         status2_g = self.dev.gauge2_check()
 
