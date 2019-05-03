@@ -124,7 +124,7 @@ class tpg261_driver(object):
                 self.pres_flag = 2
                 time.sleep(1)
 
-                if self.unit_flag = 0:
+                if self.unit_flag == 0:
                     unit = self.dev.pres_unit_bar()
                     if unit == b'0':
                         msg = String()
@@ -134,7 +134,7 @@ class tpg261_driver(object):
                         pass
                     self.pres_flag = 1
 
-                if self.unit_flag = 1:
+                if self.unit_flag == 1:
                     unit = self.dev.pres_unit_torr()
                     if unit == b'1':
                         msg = String()
@@ -144,7 +144,7 @@ class tpg261_driver(object):
                         pass
                     self.pres_flag = 1
 
-                if self.unit_flag = 0:
+                if self.unit_flag == 2:
                     unit = self.dev.pres_unit_bar()
                     if unit == b'2':
                         msg = String()
