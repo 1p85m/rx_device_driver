@@ -145,7 +145,7 @@ class tpg261_driver(object):
             #        self.pres_flag = 1
 
                 elif self.unit_flag == 2:
-                    unit = self.dev.pres_unit_bar()
+                    unit = self.dev.pres_unit_pa()
                     if unit == b'2':
                         msg = String()
                         msg.data = "Pascal"
