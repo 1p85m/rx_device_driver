@@ -23,7 +23,7 @@ class tpg261_driver(object):
     def pres_switch(self,q):
         self.pres_flag = q.data
         return
-'''
+
     def query_pressure(self):
         while not rospy.is_shutdown():
 
@@ -54,7 +54,7 @@ class tpg261_driver(object):
                         error = self.dev.pressure_error()
                         self.pub_er.publish(error)
                         pass
-'''
+
 #subのなかにpubを置く
     #def check_gague_s(self):
     #    self.tpg.check_gauge()
@@ -239,8 +239,8 @@ class tpg261_driver(object):
 if __name__ == "__main__" :
     rospy.init_node("tpg261")
     tpg = tpg261_driver()
-#    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
-#    thread_tpg_pres.start()
+    thread_tpg_pres = threading.Thread(target=tpg.query_pressure)
+    thread_tpg_pres.start()
     thread_tpg_gauge = threading.Thread(target=tpg.check_gauge)
     thread_tpg_gauge.start()
 
