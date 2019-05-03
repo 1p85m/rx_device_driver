@@ -62,8 +62,9 @@ class tpg261_driver(object):
     def check_gauge(self):
         while not rospy.is_shutdown():
 
-            while self.pres_flag ==1 :
+            while self.pres_flag == 1 :
                 continue
+
             while self.pres_flag == 0 :
 
                 self.pres_flag = 0
@@ -90,17 +91,17 @@ class tpg261_driver(object):
                 if status2_g == b'0':
                     msg = String()
                     msg.data = "CannotBeChanged"
-                self.pub_g2.publish(msg)
-            elif status2_g == b'1':
-                msg = String()
-                msg.data = "TurnedOff"
-                self.pub_g2.publish(msg)
-            elif status2_g == b'2':
-                msg = String()
-                msg.data = "TurnedOn"
-                self.pub_g2.publish(msg)
-            else:
-                pass
+                    self.pub_g2.publish(msg)
+                elif status2_g == b'1':
+                    msg = String()
+                    msg.data = "TurnedOff"
+                    self.pub_g2.publish(msg)
+                elif status2_g == b'2':
+                    msg = String()
+                    msg.data = "TurnedOn"
+                    self.pub_g2.publish(msg)
+                else:
+                    pass
 
             self.pres_flag = 1
 
