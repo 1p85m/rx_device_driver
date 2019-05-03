@@ -56,8 +56,8 @@ class tpg261_driver(object):
                         pass
 '''
 #subのなかにpubを置く
-    def check_gague_s(self):
-        self.tpg.check_gauge()
+    #def check_gague_s(self):
+    #    self.tpg.check_gauge()
 
     def check_gauge(self):
         while not rospy.is_shutdown():
