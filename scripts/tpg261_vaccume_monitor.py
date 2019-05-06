@@ -18,7 +18,7 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 3
+        self.pres_flag = 0
         '''
         0:check gague
         1:pressure
@@ -117,9 +117,9 @@ class tpg261_driver(object):
                 self.gauge_moniter()
 
 
-    def gauge_moniter(self,status1_g,status2_g):
-        #status1_g = self.dev.gauge1_check()
-        #status2_g = self.dev.gauge2_check()
+    def gauge_moniter(self):
+        status1_g = self.dev.gauge1_check()
+        status2_g = self.dev.gauge2_check()
         if status1_g == b'0' and status2_g == b'0':
             msg = String()
             msg.data = "CannotBeChanged_1And_2"
