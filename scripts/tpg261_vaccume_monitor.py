@@ -73,8 +73,8 @@ class tpg261_driver(object):
                         pass
 
 #subのなかにpubを置く
-    def check_gauge_s(self):
-        self.tpg.check_gauge()
+#    def check_gauge_s(self):
+#        self.tpg.check_gauge()
 
     def check_gauge(self):
         while not rospy.is_shutdown():
@@ -89,7 +89,7 @@ class tpg261_driver(object):
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
                 self.gauge_moniter()
-
+'''
     def change_gauge(self):
         while not rospy.is_shutdown():
             while self.pres_flag != 3 :
@@ -116,7 +116,7 @@ class tpg261_driver(object):
                 status2_g = self.dev.gauge2_check()
                 self.gauge_moniter()
 
-
+'''
     def gauge_moniter(self):
         status1_g = self.dev.gauge1_check()
         status2_g = self.dev.gauge2_check()
