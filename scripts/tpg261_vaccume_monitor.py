@@ -89,7 +89,7 @@ class tpg261_driver(object):
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
                 self.gauge_moniter()
-                '''
+
     def change_gauge(self):
         while not rospy.is_shutdown():
             while self.pres_flag != 3 :
@@ -116,7 +116,7 @@ class tpg261_driver(object):
                 status2_g = self.dev.gauge2_check()
                 self.gauge_moniter()
 
-                '''
+
     def gauge_moniter(self):
         status1_g = self.dev.gauge1_check()
         status2_g = self.dev.gauge2_check()
@@ -344,7 +344,8 @@ if __name__ == "__main__" :
     thread_tpg_gauge.start()
     thread_tpg_unit = threading.Thread(target=tpg.change_unit)
     thread_tpg_unit.start()
-
+    thread_tpg_gauge_change = threading.Thread(target=tpg.change_gauge)
+    thread_tpg_gauge_change.start()
 
 
 
