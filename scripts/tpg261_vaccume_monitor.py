@@ -82,9 +82,9 @@ class tpg261_driver(object):
                 self.dev.gauge_query()
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
-                self.tpg.gague_moniter()
+                self.gague_moniter()
 
-    def gague_moniter(self):
+    def gague_moniter(self,status1_g,status2_g):
         if status1_g == b'0' and status2_g == b'0':
             msg = String()
             msg.data = "CannotBeChanged_1And_2"
