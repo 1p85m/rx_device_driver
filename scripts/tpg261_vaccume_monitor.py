@@ -23,6 +23,7 @@ class tpg261_driver(object):
         0:check gague
         1:pressure
         2:unit
+        3:change gauge
 
         '''
         self.unit_flag = 2
@@ -31,7 +32,11 @@ class tpg261_driver(object):
         1:torr
         2:pa
         '''
-
+        self.pres_flag == 1
+        '''
+        1:gauge1
+        2:gague2
+        '''
 #switch
     def pres_switch(self,q):
         self.pres_flag = q.data
@@ -84,8 +89,29 @@ class tpg261_driver(object):
                 status2_g = self.dev.gauge2_check()
                 self.gague_moniter()
 
-    def gague_moniter(self):
+    def change_gague(self):
+        while not rospy.is_shutdown():
+            while self.pres_flag != 3 :
+                continue
 
+            while self.pres_flag == 3 and self.gauge_flag == 1 :
+                time.sleep(0.3)
+                self.dev.gague_change_1()
+                status1_g = self.dev.gauge1_check()
+                status2_g = self.dev.gauge2_check()
+                self.gague_moniter()
+
+            while self.pres_flag == 3 and self.gauge_flag == 2 :
+                time.sleep(0.3)
+                self.dev.gague_change_2()
+                status1_g = self.dev.gauge1_check()
+                status2_g = self.dev.gauge2_check()
+                self.gague_moniter()
+
+
+
+
+    def gague_moniter(self):
         status1_g = self.dev.gauge1_check()
         status2_g = self.dev.gauge2_check()
         if status1_g == b'0' and status2_g == b'0':
