@@ -18,7 +18,7 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 0
+        self.pres_flag = 3
         '''
         0:check gague
         1:pressure
@@ -32,10 +32,11 @@ class tpg261_driver(object):
         1:torr
         2:pa
         '''
-        self.pres_flag == 1
+        self.pres_flag == 2
         '''
-        1:gauge1
-        2:gague2
+        1:gauge1 On
+        2:gague2 On
+        3:gague1 2 Off
         '''
 #switch
     def pres_switch(self,q):
@@ -108,7 +109,12 @@ class tpg261_driver(object):
                 status2_g = self.dev.gauge2_check()
                 self.gague_moniter()
 
-
+            while self.pres_flag == 3 and self.gauge_flag == 3 :
+                time.sleep(0.3)
+                self.dev.gague_change_Off1_2()
+                status1_g = self.dev.gauge1_check()
+                status2_g = self.dev.gauge2_check()
+                self.gague_moniter()
 
 
     def gague_moniter(self):
