@@ -12,6 +12,7 @@ class tpg261_driver(object):
         self.pub_p = rospy.Publisher("/tpg_pressure", Float64, queue_size=1)
         self.sub_p = rospy.Subscriber("/tpg_pres_sub", Float64, self.pres_switch)
         self.pub_er = rospy.Publisher("/tpg_error", String, queue_size=1)
+        self.pub_g = rospy.Publisher("/tpg_gauge", String, queue_size=1)
         self.pub_g1 = rospy.Publisher("/tpg_gauge1", String, queue_size=1)
         self.pub_g2 = rospy.Publisher("/tpg_gauge2", String, queue_size=1)
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
@@ -81,36 +82,46 @@ class tpg261_driver(object):
                 self.dev.gauge_query()
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
+                self.tpg.gague_moniter()
 
-                if status1_g == b'0':
-                    msg = String()
-                    msg.data = "CannotBeChanged1"
-                    self.pub_g1.publish(msg)
-                elif status1_g == b'1':
-                    msg = String()
-                    msg.data = "TurnedOff1"
-                    self.pub_g1.publish(msg)
-                elif status1_g == b'2':
-                    msg = String()
-                    msg.data = "TurnedOn1"
-                    self.pub_g1.publish(msg)
-                else:
-                    pass
-
-                if status2_g == b'0':
-                    msg = String()
-                    msg.data = "CannotBeChanged2"
-                    self.pub_g2.publish(msg)
-                elif status2_g == b'1':
-                    msg = String()
-                    msg.data = "TurnedOff2"
-                    self.pub_g2.publish(msg)
-                elif status2_g == b'2':
-                    msg = String()
-                    msg.data = "TurnedOn2"
-                    self.pub_g2.publish(msg)
-                else:
-                    pass
+    def gague_moniter(self):
+        if status1_g == b'0' and status2_g == b'0':
+            msg = String()
+            msg.data = "CannotBeChanged_1And_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'1' and status2_g == b'1':
+            msg = String()
+            msg.data = "TurnedOff_1And_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'2' and status2_g == b'2':
+            msg = String()
+            msg.data = "TurnedOn_1And_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'0' and status2_g == b'1':
+            msg = String()
+            msg.data = "CannotBeChanged_1TurnedOff_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'0' and status2_g == b'2':
+            msg = String()
+            msg.data = "CannotBeChanged_1TurnedOn_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'1' and status2_g == b'0':
+            msg = String()
+            msg.data = "TurnedOff_1CannotBeChanged_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'1' and status2_g == b'2':
+            msg = String()
+            msg.data = "TurnedOff_1TurnedOn_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'2' and status2_g == b'0':
+            msg = String()
+            msg.data = "TurnedOn_1CannotBeChanged_2"
+            self.pub_g.publish(msg)
+        elif status1_g == b'2' and status2_g == b'1':
+            msg = String()
+            msg.data = "TurnedOn_1TurnedOff_2"
+            self.pub_g.publish(msg)
+            pass
 
                 #self.pres_flag = 1
 
