@@ -112,7 +112,7 @@ class tpg261_driver(object):
                 else:
                     pass
 
-                self.pres_flag = 1
+                #self.pres_flag = 1
 
 
     def change_unit(self):
