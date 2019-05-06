@@ -100,21 +100,21 @@ class tpg261_driver(object):
                 self.dev.gauge_change_1()
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
-                self.gague_moniter()
+                self.gauge_moniter()
 
             while self.pres_flag == 3 and self.gauge_flag == 2 :
                 time.sleep(0.3)
                 self.dev.gauge_change_2()
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
-                self.gague_moniter()
+                self.gauge_moniter()
 
             while self.pres_flag == 3 and self.gauge_flag == 3 :
                 time.sleep(0.3)
                 self.dev.gauge_change_Off1_2()
                 status1_g = self.dev.gauge1_check()
                 status2_g = self.dev.gauge2_check()
-                self.gague_moniter()
+                self.gauge_moniter()
 
 
     def gague_moniter(self):
