@@ -18,7 +18,7 @@ class tpg261_driver(object):
         self.pub_uni = rospy.Publisher("/tpg_unit", String, queue_size=1)
         self.dev = tpg261.device()
 #flag
-        self.pres_flag = 0
+        self.pres_flag = 1
         '''
         0:check gague
         1:pressure
