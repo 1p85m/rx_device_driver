@@ -32,7 +32,7 @@ class tpg261_driver(object):
         1:torr
         2:pa
         '''
-        self.gauge_flag = 1
+        self.gauge_flag = 2
         '''
         1:gauge1 On
         2:gague2 On
