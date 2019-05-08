@@ -24,7 +24,7 @@ if __name__ == '__main__':
     host = rospy.get_param('~host')
     port = rospy.get_param('~port')
     rate = rospy.get_param('~rate')
-    onoff_list = list(map(int, str2list(rospy.get_param('~onoff')))
+    onoff_list = list(map(int, str2list(rospy.get_param('~onoff'))))
 
     try:
         temp = l218.lakeshore218_driver(host, port)
