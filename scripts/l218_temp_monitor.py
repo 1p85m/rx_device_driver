@@ -40,7 +40,7 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
 
         ret = temp.measure()
-        for pub, onoff, idx in zip(pub_list, onoff_list, range(4)):
+        for pub, onoff, idx in zip(pub_list, onoff_list, range(8)):
             msg = Float64()
             if onoff == 1:
                 msg.data = ret[idx]
